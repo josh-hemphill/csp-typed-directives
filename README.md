@@ -6,7 +6,7 @@
 [![NPM](https://img.shields.io/static/v1?label=&message=NPM&color=informational&style=flat-square)](https://npmjs.org/package/csp-typed-directives)
 [![Codecov](https://img.shields.io/codecov/c/github/josh-hemphill/csp-typed-directives.svg?style=flat-square)](https://codecov.io/gh/josh-hemphill/csp-typed-directives)
 [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/csp-typed-directives?label=Deps&style=flat-square)](https://libraries.io/npm/csp-typed-directives)
-[![Rate on Openbase](https://badges.openbase.io/js/rating/csp-typed-directives.svg)](https://openbase.io/js/csp-typed-directives?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
+[![Rate on Openbase](https://badges.openbase.com/js/rating/csp-typed-directives.svg)](https://openbase.com/js/csp-typed-directives?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 [![Test](https://github.com/josh-hemphill/csp-typed-directives/actions/workflows/test.yml/badge.svg)](https://github.com/josh-hemphill/csp-typed-directives/actions/workflows/test.yml)
 [![Release](https://github.com/josh-hemphill/csp-typed-directives/actions/workflows/release.yml/badge.svg)](https://github.com/josh-hemphill/csp-typed-directives/actions/workflows/release.yml)
 
