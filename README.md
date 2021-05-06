@@ -16,7 +16,7 @@ Kept up to date with [Mozilla's CSP documentation of available directives](https
 
 ## Installation
 
-Install the plugin with npm:
+Install with npm:
 
 ```shell
 $ npm install --save-dev csp-typed-directives
