@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.0...v1.1.1) (2021-05-06)
+
+
+### Bug Fixes
+
+* :bug: fix schema naming and tests ([90a36fe](https://github.com/josh-hemphill/csp-typed-directives/commit/90a36fef56ea4410d1d48111e973984b895fcf32))
+
 # [1.1.0](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.0.0...v1.1.0) (2021-05-06)
 
 
