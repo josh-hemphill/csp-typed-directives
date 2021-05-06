@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.0.0...v1.1.0) (2021-05-06)
+
+
+### Features
+
+* :sparkles: Runtime directive mapping and schema ([1f9ffb3](https://github.com/josh-hemphill/csp-typed-directives/commit/1f9ffb30b940dfe61a819e5ce795b7b2be6cf942))
+
 # 1.0.0 (2021-05-06)
 
 
