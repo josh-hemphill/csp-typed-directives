@@ -8,7 +8,7 @@ export const directiveNamesList = <(keyof typeof directiveMap)[]>Object.keys(dir
 type DirectiveName = keyof typeof directiveMap;
 type DirectiveValue = typeof directiveMap[DirectiveName]
 type DirectiveMapPair = [DirectiveName,DirectiveValue]
-type CategoryValue = typeof directiveValuesByCategory[DirectiveValue[number]]
+type CategoryValue = FlatArray<(typeof directiveValuesByCategory[DirectiveValue[number]]),1>
 type DirectiveResult = {
 	values: Partial<CategoryValue>[]
 	categories: DirectiveValue
@@ -17,7 +17,7 @@ export const DirectiveMap = new Map<DirectiveName,DirectiveResult>(Object.entrie
 	const [k,v] = <DirectiveMapPair>dPair;
 	return [k,{
 		get values (): Partial<CategoryValue>[] {
-			return this.categories.map((category) => directiveValuesByCategory[category]).flat(0);
+			return this.categories.map((category) => directiveValuesByCategory[category]).flat(1);
 		},
 		categories: v,
 	}];

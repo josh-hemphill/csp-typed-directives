@@ -232,14 +232,18 @@ export const directiveValuesByCategory = {
 				'Hostname': 'string',
 				'Protocol': hostProtocolScheme,
 			},
-			compose: (args: Record<string,string>) =>
+			compose: (args: {
+				'Port': number,
+				'Hostname': string,
+				'Protocol': HostProtocolSchemes,
+			}) =>
 				<HostSource>`${args?.['Protocol'] || ''}${args?.['Hostname'] || ''}${args?.['Port'] ? ':' + args?.['Port'] : ''}`,
 		},
 	],
 	schemeSource,
 	cryptoSource: [
 		{
-			displayName: 'Hostname/URL Source',
+			displayName: 'Crypto Nonce/Hash Source',
 			consumes: {
 				'Hash': 'string',
 				'Algorithm': validCrypto,

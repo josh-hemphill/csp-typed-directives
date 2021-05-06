@@ -5,3 +5,5 @@ type HostSource = `${HostSchemes}${HostNameScheme}${PortScheme}`
 type HttpDelineators = '/' | '?' | '#' | '\\'
 type OptionalPath = `${HttpDelineators}${string}` | ''
 declare type UrlString = `${HostSource}${OptionalPath}`;
+
+declare type Obj = Record<string | number | symbol,unknown>
