@@ -5,6 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "npm run build -- --watch",
+		"pre-push": "run-s build lint:* test:*",
 		"build": "tsup src/index.ts --sourcemap --dts --format cjs,esm",
 		"log": "conventional-changelog -p angular -i CHANGELOG.md -s",
 		"lint": "run-s lint:*",
