@@ -1,0 +1,140 @@
+{
+	"name": "csp-typed-directives",
+	"version": "1.0.6",
+	"description": "Provides type information for all CSP directives and related headers' directives; as well as a basic utility funtion that helps convert the typed properties to the header content's policy string.",
+	"type": "module",
+	"scripts": {
+		"dev": "npm run build -- --watch",
+		"build": "tsup src/index.ts --sourcemap --dts --format cjs,esm",
+		"log": "conventional-changelog -p angular -i CHANGELOG.md -s",
+		"lint": "run-s lint:*",
+		"lint:typescript": "eslint src --ext .ts --fix",
+		"lint:markdown": "markdownlint-cli2-fix \"**/*.md\" \"#node_modules\" \"#CHANGELOG.md\"",
+		"test": "run-s test:*",
+		"test:lint": "eslint src --ext .ts",
+		"test:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#CHANGELOG.md\"",
+		"test:spelling": "cspell --config ./cSpell.json \"{README.md,.github/*.md,src/**/*.ts,docs/**/*.md}\"",
+		"test:unit": "jest -c config/jest.config.ts -b --forceExit --coverage --runInBand ",
+		"watch:test": "jest -c config/jest.config.ts -b --forceExit --runInBand --watch",
+		"cov:send": "run-s build test && codecov",
+		"doc": "run-s doc:html && open-cli build/docs/index.html",
+		"doc:html": "typedoc src/ --exclude **/*.test.ts --target ES6 --mode file --out build/docs",
+		"doc:json": "typedoc src/ --exclude **/*.test.ts --target ES6 --mode file --json build/docs/typedoc.json",
+		"reset-hard": "git clean -dfx && git reset --hard && npm i",
+		"prepare-release": "run-s reset-hard test doc:html version doc:publish",
+		"ci:validate": "rm -rf node_modules && npm ci && npm run test",
+		"prepublishOnly": "run-s pinst:disable ci:validate build",
+		"semantic-release": "semantic-release",
+		"install:husky": "is-ci || husky install",
+		"pinst:disable": "pinst --disable",
+		"postpublish": "pinst --enable"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/josh-hemphill/csp-typed-directives.git"
+	},
+	"keywords": [
+		"vite-plugin",
+		"CSP",
+		"CSPs",
+		"header",
+		"security",
+		"generate"
+	],
+	"maintainers": [
+		{
+			"name": "Joshua Hemphill",
+			"email": "jhemphill@tecnicocorp.com",
+			"url": "https://joshuahemphill.com"
+		}
+	],
+	"author": {
+		"name": "Joshua Hemphill",
+		"email": "jhemphill@tecnicocorp.com",
+		"url": "https://joshuahemphill.com"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/josh-hemphill/csp-typed-directives/issues"
+	},
+	"homepage": "https://github.com/josh-hemphill/csp-typed-directives#readme",
+	"files": [
+		"dist",
+		"mod.ts",
+		"CHANGELOG.md",
+		"LICENSE",
+		"SECURITY.md",
+		"README.md"
+	],
+	"main": "dist/index.cjs",
+	"module": "dist/index.js",
+	"exports": {
+		"import": "./dist/index.js",
+		"require": "./dist/index.cjs"
+	},
+	"types": "dist/index.d.ts",
+	"typings": "dist/index.d.ts",
+	"devDependencies": {
+		"@commitlint/cli": "^12.1.1",
+		"@commitlint/config-conventional": "^12.1.1",
+		"@semantic-release/changelog": "^5.0.1",
+		"@semantic-release/git": "^9.0.0",
+		"@semantic-release/npm": "^7.1.3",
+		"@types/jest": "^26.0.23",
+		"@types/node": "^14.14.43",
+		"@typescript-eslint/eslint-plugin": "^4.22.0",
+		"@typescript-eslint/parser": "^4.22.0",
+		"codecov": "^3.8.2",
+		"commitizen": "^4.2.3",
+		"conventional-changelog-cli": "^2.1.1",
+		"cspell": "^5.3.12",
+		"cz-conventional-changelog": "^3.2.0",
+		"eslint": "^7.25.0",
+		"eslint-plugin-import": "^2.22.1",
+		"eslint-plugin-jest": "^24.3.6",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-promise": "^5.1.0",
+		"gh-pages": "^3.1.0",
+		"husky": "^5.2.0",
+		"jest": "^26.6.3",
+		"lint-staged": "^10.5.4",
+		"markdownlint-cli2": "^0.1.3",
+		"npm-run-all": "^4.1.5",
+		"open-cli": "^6.0.1",
+		"pinst": "^2.1.6",
+		"rimraf": "^3.0.2",
+		"semantic-release": "^17.4.2",
+		"semantic-release-license": "^1.0.2",
+		"ts-jest": "^26.5.5",
+		"ts-node": "^9.1.1",
+		"tsup": "^4.10.1",
+		"typedoc": "^0.20.36",
+		"typescript": "^4.2.4"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"release": {
+		"extends": "./config/.releaserc.json"
+	},
+	"config": {
+		"commitizen": {
+			"path": "cz-conventional-changelog"
+		}
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged",
+			"pre-push": "npm run test"
+		}
+	},
+	"eslintConfig": {
+		"extends": "./config/.eslintrc.json"
+	},
+	"lint-staged": {
+		"*.js": [
+			"eslint --cache --fix",
+			"git add ."
+		]
+	}
+}
