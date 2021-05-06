@@ -8,7 +8,7 @@
 [![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/csp-typed-directives?label=Deps&style=flat-square)](https://libraries.io/npm/csp-typed-directives)
 [![Rate on Openbase](https://badges.openbase.com/js/rating/csp-typed-directives.svg)](https://openbase.com/js/csp-typed-directives?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 [![Test](https://github.com/josh-hemphill/csp-typed-directives/actions/workflows/test.yml/badge.svg)](https://github.com/josh-hemphill/csp-typed-directives/actions/workflows/test.yml)
-[![Release](https://github.com/josh-hemphill/csp-typed-directives/actions/workflows/release.yml/badge.svg)](https://github.com/josh-hemphill/csp-typed-directives/actions/workflows/release.yml)
+[![Build Release](https://github.com/josh-hemphill/csp-typed-directives/actions/workflows/release.yml/badge.svg)](https://github.com/josh-hemphill/csp-typed-directives/actions/workflows/release.yml)
 
 Provides type information for all CSP directives and related headers' directives; as well as a basic utility funtion that helps convert the typed properties to key/values of each header content's policy string.
 
@@ -31,7 +31,7 @@ Either pass your CSP directives in at instatiation, or after.
 ```javascript
 const { CspDirectives } = require('csp-typed-directives')
 // or ESM
-import { CspDirectives } from "module";
+import { CspDirectives } from 'csp-typed-directives';
 
 const cspD = new CspDirectives({
   'child-src': 'none',
@@ -57,7 +57,7 @@ The default configuration produces a referrer policy of `strict-origin-when-cros
 ```typescript
 const { CspDirectives } = require('csp-typed-directives')
 // or ESM
-import { CspDirectives } from "module";
+import { CspDirectives } from 'csp-typed-directives';
 
 const reportTo: ReportTo[] = [
   {
@@ -94,6 +94,46 @@ csp.headers === {
 ```
 
 For reading up on the descriptions and implications of all directives see [Mozilla's CSP documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)
+
+### Iterate over all available directives
+
+This also provides a map of constants of every available directive name and the category(s) of souces/directives it can be assigned.
+
+```ts
+import { directiveNamesList } from 'csp-typed-directives';
+
+const myDirectives = directiveNamesList
+  .reduce((acc,v) => {
+    // ! Warning: not all directives allow the full set of directive parameters
+    // Though as of 5/6/2021 they all support the 'none' directive, though would be kind of pointless to do this.
+    acc[v] = 'none'
+  },{})
+```
+
+```ts
+import { DirectiveMap } from 'csp-typed-directives';
+
+let myDirectives = DirectiveMap.get('report-to')
+myDirectives === [
+  {
+    displayName: 'Any String',
+    consumes: {
+      'String': 'string',
+    },
+    compose: (args: {String:string}) => args.String,
+  },
+]
+
+myDirectives = DirectiveMap.get('require-sri-for')
+myDirectives === [
+  'script', 'style', 'script style'
+]
+
+myDirectives = DirectiveMap.get('upgrade-insecure-requests')
+myDirectives === [
+  true, false,
+]
+```
 
 ## Changelog
 

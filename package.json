@@ -35,12 +35,15 @@
 		"url": "git+https://github.com/josh-hemphill/csp-typed-directives.git"
 	},
 	"keywords": [
-		"vite-plugin",
 		"CSP",
 		"CSPs",
+		"content-security-policy",
 		"header",
 		"security",
-		"generate"
+		"generate",
+		"directive",
+		"types",
+		"typescript"
 	],
 	"maintainers": [
 		{

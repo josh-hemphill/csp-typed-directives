@@ -1,10 +1,27 @@
-import { directiveNames, Directives, ReportTo, ReferrerHeaderOptions, referrerHeaderOptions } from './csp.types.js';
+import { directiveMap, Directives, ReportTo, ReferrerHeaderOptions, referrerHeaderOptions, directiveValuesByCategory } from './csp.types.js';
 type ReportTos = ReportTo | ReportTo[]
 function normalizeArrayString<T> (arrS: T[] | T): T[] {
 	return Array.isArray(arrS) ? arrS : [arrS];
 }
 
-export const directiveNamesList = directiveNames;
+export const directiveNamesList = <(keyof typeof directiveMap)[]>Object.keys(directiveMap);
+type DirectiveName = keyof typeof directiveMap;
+type DirectiveValue = typeof directiveMap[DirectiveName]
+type DirectiveMapPair = [DirectiveName,DirectiveValue]
+type CategoryValue = typeof directiveValuesByCategory[DirectiveValue[number]]
+type DirectiveResult = {
+	values: Partial<CategoryValue>[]
+	categories: DirectiveValue
+}
+export const DirectiveMap = new Map<DirectiveName,DirectiveResult>(Object.entries(directiveMap).map((dPair) => {
+	const [k,v] = <DirectiveMapPair>dPair;
+	return [k,{
+		get values (): Partial<CategoryValue>[] {
+			return this.categories.map((category) => directiveValuesByCategory[category]).flat(0);
+		},
+		categories: v,
+	}];
+}));
 export const referrerHeaderOptionsList = referrerHeaderOptions;
 export type DirectivesObj = Directives;
 export type ReportToObj = ReportTo;
@@ -51,7 +68,7 @@ export class CspDirectives {
 			'Report-To': normalizeArrayString(this.ReportTo).length ? JSON.stringify(this.ReportTo) : '',
 			'Referrer-Policy':this.ReferrerHeader,
 		};
-		directiveNames.forEach((v) => {
+		directiveNamesList.forEach((v) => {
 			if (this.CSP[v]) {
 				const val = typeof this.CSP[v] === 'boolean'
 					? ''

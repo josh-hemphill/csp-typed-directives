@@ -2,50 +2,36 @@
  * Descriptions and other information taken from the Mozilla developer docs
  * @ https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
  */
-type SchemeSource = 'http:' | 'https:' | 'data:' | 'mediastream:' | 'blob:' | 'filesystem:';
-type HostSchemes = 'http://' | 'https://' | ''
+// Scheme Source Definition
+export const schemeSource = ['http:', 'https:', 'data:', 'mediastream:', 'blob:', 'filesystem:'] as const;
+type SchemeSource = typeof schemeSource[number];
+
+// Hosts Source Definition
+export const hostProtocolScheme = ['http://', 'https://', ''] as const;
+type HostProtocolSchemes = typeof hostProtocolScheme[number];
 type PortScheme = `:${number}` | ''
+/** Can actually be any string, but typed with `string.string` to restrict the combined optional types from all just bing `string` */
 type HostNameScheme = `${string}.${string}`
-type HostSource = `${HostSchemes}${HostNameScheme}${PortScheme}`
-type ValidCrypto = 'nonce' | 'sha256' | 'sha384' | 'sha512'
+type HostSource = `${HostProtocolSchemes}${HostNameScheme}${PortScheme}`
+
+// Crypto Source Definition
+export const validCrypto = ['nonce', 'sha256', 'sha384', 'sha512'] as const;
+type ValidCrypto = typeof validCrypto[number];
 type CryptoSources = `${ValidCrypto}-${string}`
-type HttpDelineators = '/' | '?' | '#' | '\\'
+
+// URI Definition
+export const httpDelineators = ['/', '?', '#', '\\'] as const;
+type HttpDelineators = typeof httpDelineators[number];
 type UriPath = `${HttpDelineators}${string}`
 
-export type Source = 'self' | 'unsafe-eval' | 'unsafe-hashes' | 'unsafe-inline' | 'none' | HostSource | SchemeSource | CryptoSources
+// Base Source Directives
+export const baseSources = ['self', 'unsafe-eval', 'unsafe-hashes', 'unsafe-inline', 'none'] as const;
+type BaseSources = typeof baseSources[number]
+
+// Combined all source directives
+export const source = [...baseSources, ...schemeSource] as const;
+export type Source = BaseSources | HostSource | SchemeSource | CryptoSources
 type Sources = Source | Source[]
-export const directiveNames: Readonly<(keyof Directives)[]> = [
-	'child-src',
-	'frame-src',
-	'worker-src',
-	'connect-src',
-	'font-src',
-	'img-src',
-	'manifest-src',
-	'media-src',
-	'object-src',
-	'prefetch-src',
-	'script-src',
-	'script-src-elem',
-	'script-src-attr',
-	'style-src',
-	'style-src-elem',
-	'style-src-attr',
-	'base-uri',
-	'plugin-types',
-	'sandbox',
-	'form-action',
-	'frame-ancestors',
-	'navigate-to',
-	'report-uri',
-	'report-to',
-	'block-all-mixed-content',
-	'referrer',
-	'require-sri-for',
-	'require-trusted-types-for',
-	'trusted-types',
-	'upgrade-insecure-requests',
-] as const;
 
 export const referrerHeaderOptions = [
 	/**
@@ -79,25 +65,15 @@ export const referrerHeaderOptions = [
 	 * * This policy will leak potentially-private information from HTTPS resource URLs to insecure origins.
 	 * * Carefully consider the impact of this setting. */
 	'unsafe-url',
+	'none',
 ] as const;
 export type ReferrerHeaderOptions = typeof referrerHeaderOptions[number]
 
-type ChildSource = {
+type ChildDirectives = {
 	'child-src'?: Sources
 	'frame-src'?: Sources
 	'worker-src'?: Sources
 }
-
-type ReferrerPolicy = ''
-| 'no-referrer'
-| 'no-referrer-when-downgrade'
-| 'origin'
-| 'origin-when-cross-origin'
-| 'same-origin'
-| 'strict-origin'
-| 'strict-origin-when-cross-origin'
-| 'unsafe-url'
-| 'none'
 
 type SourceDirectives = {
 	'connect-src'?: Sources
@@ -116,39 +92,45 @@ type SourceDirectives = {
 	'style-src-attr'?: Sources
 }
 
-type SandboxOption =
-/** Allows for downloads to occur without a gesture from the user. */
-'allow-downloads-without-user-activation ' |
-/** Allows the page to submit forms. If this keyword is not used, this operation is not allowed. */
-'allow-forms' |
-/** Allows the page to open modal windows. */
-'allow-modals' |
-/** Allows the page to disable the ability to lock the screen orientation. */
-'allow-orientation-lock' |
-/** Allows the page to use the Pointer Lock API. */
-'allow-pointer-lock' |
-/** Allows popups (like from window.open, target="_blank", showModalDialog).
- * If this keyword is not used, that functionality will silently fail. */
-'allow-popups' |
-/** Allows a sandboxed document to open new windows without forcing the sandboxing flags upon them.
- * This will allow, for example, a third-party advertisement to be safely sandboxed without
- * forcing the same restrictions upon a landing page. */
-'allow-popups-to-escape-sandbox' |
-/** Allows embedders to have control over whether an iframe can start a presentation session. */
-'allow-presentation' |
-/** Allows the content to be treated as being from its normal origin.
- * If this keyword is not used, the embedded content is treated as being from a unique origin. */
-'allow-same-origin' |
-/** Allows the page to run scripts (but not create pop-up windows).
- * If this keyword is not used, this operation is not allowed. */
-'allow-scripts' |
-/** Lets the resource request access to the parent's storage capabilities with the Storage Access API. */
-'allow-storage-access-by-user-activation ' |
-/** Allows the page to navigate (load) content to the top-level browsing context.
- * If this keyword is not used, this operation is not allowed. */
-'allow-top-navigation' |
-/** Lets the resource navigate the top-level browsing context, but only if initiated by a user gesture. */
-'allow-top-navigation-by-user-activation'
+
+export const sandboxDirectives = [
+	/** Allows for downloads to occur without a gesture from the user. */
+	'allow-downloads-without-user-activation ',
+	/** Allows the page to submit forms. If this keyword is not used, this operation is not allowed. */
+	'allow-forms',
+	/** Allows the page to open modal windows. */
+	'allow-modals',
+	/** Allows the page to disable the ability to lock the screen orientation. */
+	'allow-orientation-lock',
+	/** Allows the page to use the Pointer Lock API. */
+	'allow-pointer-lock',
+	/** Allows popups (like from window.open, target="_blank", showModalDialog).
+	 * If this keyword is not used, that functionality will silently fail. */
+	'allow-popups',
+	/** Allows a sandboxed document to open new windows without forcing the sandboxing flags upon them.
+	 * This will allow, for example, a third-party advertisement to be safely sandboxed without
+	 * forcing the same restrictions upon a landing page. */
+	'allow-popups-to-escape-sandbox',
+	/** Allows embedders to have control over whether an iframe can start a presentation session. */
+	'allow-presentation',
+	/** Allows the content to be treated as being from its normal origin.
+	 * If this keyword is not used, the embedded content is treated as being from a unique origin. */
+	'allow-same-origin',
+	/** Allows the page to run scripts (but not create pop-up windows).
+	 * If this keyword is not used, this operation is not allowed. */
+	'allow-scripts',
+	/** Lets the resource request access to the parent's storage capabilities with the Storage Access API. */
+	'allow-storage-access-by-user-activation ',
+	/** Allows the page to navigate (load) content to the top-level browsing context.
+	 * If this keyword is not used, this operation is not allowed. */
+	'allow-top-navigation',
+	/** Lets the resource navigate the top-level browsing context, but only if initiated by a user gesture. */
+	'allow-top-navigation-by-user-activation',
+
+] as const;
+type SandboxOption = typeof sandboxDirectives[number]
+
+type PluginSource = `${string}/${string}` | 'none'
 
 type DocumentDirectives = {
 	/**
@@ -159,14 +141,17 @@ type DocumentDirectives = {
 	 * Restricts the set of plugins that can be embedded into a document by
 	 * limiting the types of resources which can be loaded.
 	 * @deprecated */
-	'plugin-types'?: `${string}/${string}` | `${string}/${string}`[] | 'none'
+	'plugin-types'?: PluginSource | PluginSource[]
 
 	/**
 	 * Enables a sandbox for the requested resource similar to the <iframe> sandbox attribute. */
 	'sandbox'?: SandboxOption
 }
 
-type ActionSource = Source | 'strict-dynamic' | 'report-sample'
+export const actionSource = ['strict-dynamic', 'report-sample'] as const;
+type ActionSource = Source | typeof actionSource[number]
+
+
 type FrameSource = HostSource | SchemeSource | 'self' | 'none'
 
 /**
@@ -198,8 +183,15 @@ type ReportingDirectives = {
 }
 /** Disallows using strings with DOM XSS injection sink functions,
  * and requires matching types created by Trusted Type policies. */
-type RequireTrustedTypePolicy = 'script'
-type TrustedTypesPolicy = 'none' | 'allow-duplicates' | '*' | string
+export const requireTrustedTypePolicy = ['script'] as const;
+type RequireTrustedTypePolicy = typeof requireTrustedTypePolicy[number];
+
+export const trustedTypesPolicy = ['none', 'allow-duplicates', '*'] as const;
+type TrustedTypesPolicy = typeof trustedTypesPolicy[number] | string
+
+export const sriPolicy = ['script', 'style', 'script style'] as const;
+type SriPolicy = typeof sriPolicy[number]
+
 type OtherDirectives = {
 	/** Prevents loading any assets using HTTP when the page is loaded using HTTPS.
 		@deprecated */
@@ -208,11 +200,11 @@ type OtherDirectives = {
 	/** Used to specify information in the Referer (sic) header for links away from a page.
 	 * Use the Referrer-Policy header instead.
 		@deprecated */
-	'referrer'?: ReferrerPolicy
+	'referrer'?: ReferrerHeaderOptions
 
 	/** Requires the use of SRI for scripts or styles on the page.
 		@deprecated */
-	'require-sri-for'?: 'script' | 'style' | 'script style'
+	'require-sri-for'?: SriPolicy
 
 	/** Enforces Trusted Types at the DOM XSS injection sinks. */
 	'require-trusted-types-for'?: RequireTrustedTypePolicy
@@ -230,8 +222,115 @@ type OtherDirectives = {
 	'upgrade-insecure-requests'?: boolean
 }
 
+
+export const directiveValuesByCategory = {
+	hostSource: [
+		{
+			displayName: 'Hostname/URL Source',
+			consumes: {
+				'Port': 'number',
+				'Hostname': 'string',
+				'Protocol': hostProtocolScheme,
+			},
+			compose: (args: Record<string,string>) =>
+				<HostSource>`${args?.['Protocol'] || ''}${args?.['Hostname'] || ''}${args?.['Port'] ? ':' + args?.['Port'] : ''}`,
+		},
+	],
+	schemeSource,
+	cryptoSource: [
+		{
+			displayName: 'Hostname/URL Source',
+			consumes: {
+				'Hash': 'string',
+				'Algorithm': validCrypto,
+			},
+			compose: (args: {Hash:string,Algorithm: ValidCrypto}) => <CryptoSources>`${args.Algorithm}-${args.Hash}`,
+		},
+	],
+	baseSources,
+	primitiveSourceBool: [
+		true,
+		false,
+	],
+	primitiveSourceString: [
+		{
+			displayName: 'Any String',
+			consumes: {
+				'String': 'string',
+			},
+			compose: (args: {String:string}) => args.String,
+		},
+	],
+	trustedTypesPolicy,
+	requireTrustedTypePolicy,
+	sriPolicy,
+	referrerHeaderOptions,
+	uriPath: [
+		{
+			displayName: 'URI Source',
+			consumes: {
+				'Beginning Delineator': httpDelineators,
+				'Remaining Path': 'string',
+			},
+			compose: (args: {'Beginning Delineator':HttpDelineators,'Remaining Path': string}) =>
+				<UriPath>`${args['Beginning Delineator']}${args['Remaining Path']}`,
+		},
+	],
+	actionSource,
+	pluginSource: [
+		{
+			displayName: 'Plugin MIME Type Source',
+			consumes: {
+				'MIME Category': 'string',
+				'MIME Implementation': 'string',
+			},
+			compose: (args: {'MIME Category':string,'MIME Implementation': string}) =>
+				<PluginSource>`${args['MIME Category']}/${args['MIME Implementation']}`,
+		},
+		'none',
+	],
+	frameSource:[
+		'self',
+		'none',
+	],
+	sandboxDirectives,
+} as const;
+
+export const directiveMap: Readonly<Record<(keyof Directives),Readonly<(keyof typeof directiveValuesByCategory)[]>>> = {
+	'child-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'frame-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'worker-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'connect-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'font-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'img-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'manifest-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'media-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'object-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'prefetch-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'script-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'script-src-elem': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'script-src-attr': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'style-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'style-src-elem': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'style-src-attr': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'base-uri': ['hostSource','schemeSource','cryptoSource','baseSources','actionSource'],
+	'plugin-types': ['pluginSource'],
+	'sandbox': ['sandboxDirectives'],
+	'form-action': ['hostSource','schemeSource','cryptoSource','baseSources','actionSource'],
+	'frame-ancestors': ['hostSource','schemeSource','frameSource'],
+	'navigate-to': ['hostSource','schemeSource','cryptoSource','baseSources','actionSource'],
+	'report-uri': ['uriPath'],
+	'report-to': ['primitiveSourceString'],
+	'block-all-mixed-content': ['primitiveSourceBool'],
+	'referrer': ['referrerHeaderOptions'],
+	'require-sri-for': ['sriPolicy'],
+	'require-trusted-types-for': ['requireTrustedTypePolicy'],
+	'trusted-types': ['trustedTypesPolicy','primitiveSourceString'],
+	'upgrade-insecure-requests': ['primitiveSourceBool'],
+} as const;
+
 export type Directives =
-	ChildSource
+	ChildDirectives
 	& SourceDirectives
 	& OtherDirectives
 	& ReportingDirectives
