@@ -15,7 +15,8 @@ type HostNameScheme = `${string}.${string}`
 type HostSource = `${HostProtocolSchemes}${HostNameScheme}${PortScheme}`
 
 // Crypto Source Definition
-export const validCrypto = ['nonce', 'sha256', 'sha384', 'sha512'] as const;
+export const validHashes = ['sha256', 'sha384', 'sha512'] as const;
+export const validCrypto = ['nonce', ...validHashes] as const;
 type ValidCrypto = typeof validCrypto[number];
 type CryptoSources = `${ValidCrypto}-${string}`
 

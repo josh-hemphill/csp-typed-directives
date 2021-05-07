@@ -1,9 +1,20 @@
-import { directiveMap, Directives, ReportTo, ReferrerHeaderOptions, referrerHeaderOptions, directiveValuesByCategory } from './csp.types.js';
+import {
+	directiveMap,
+	Directives,
+	ReportTo,
+	ReferrerHeaderOptions,
+	referrerHeaderOptions,
+	directiveValuesByCategory,
+	validHashes,
+	validCrypto,
+} from './csp.types.js';
+
 type ReportTos = ReportTo | ReportTo[]
 function normalizeArrayString<T> (arrS: T[] | T): T[] {
 	return Array.isArray(arrS) ? arrS : [arrS];
 }
-
+export const ValidHashes = validHashes;
+export const ValidCrypto = validCrypto;
 export const directiveNamesList = <(keyof typeof directiveMap)[]>Object.keys(directiveMap);
 type DirectiveName = keyof typeof directiveMap;
 type DirectiveValue = typeof directiveMap[DirectiveName]
@@ -38,7 +49,12 @@ export class CspDirectives {
 	public ReportOnly: Directives | false
 	public ReportTo: ReportTos
 	public ReferrerHeader: ReferrerHeaderOptions
-	constructor (csp?: Directives,sendReportsTo?: ReportTos, reportSubset?: Directives,referrerHeaderOverride?: ReferrerHeaderOptions){
+	constructor (
+		csp?: Directives,
+		sendReportsTo?: ReportTos,
+		reportSubset?: Directives,
+		referrerHeaderOverride?: ReferrerHeaderOptions,
+	){
 		this.CSP = csp || {};
 		this.ReportOnly = reportSubset || false;
 		this.ReportTo = sendReportsTo || [];
