@@ -73,19 +73,23 @@ export class CspDirectives {
 				const val = typeof this.CSP[v] === 'boolean'
 					? ''
 					: normalizeArrayString(this.CSP[v])
-						.map((v) => `'${v}'`).join(' ');
+						.map((v) => ` '${v}'`).join('');
 				results['Content-Security-Policy'] +=
-					` ${v} ${val};`;
+					` ${v}${val};`;
 			}
 			if (this.ReportOnly && this.ReportOnly[v]) {
 				const val = typeof this.ReportOnly[v] === 'boolean'
 					? ''
 					: normalizeArrayString(this.ReportOnly[v])
-						.map((v) => `'${v}'`).join(' ');
+						.map((v) => ` '${v}'`).join('');
 				results['Content-Security-Policy-Report-Only'] +=
-					` ${v} ${val};`;
+					` ${v}${val};`;
 			}
 		});
+		results['Content-Security-Policy-Report-Only'] =
+			results['Content-Security-Policy-Report-Only'].trim();
+		results['Content-Security-Policy'] =
+			results['Content-Security-Policy'].trim();
 		return results;
 	}
 }

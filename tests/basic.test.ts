@@ -39,6 +39,21 @@ describe('new CspDirectives()',() => {
 				'Referrer-Policy': 'strict-origin-when-cross-origin',
 			});
 		});
+		it('returns boolean directives',() => {
+			const csp: Directives = {
+				'upgrade-insecure-requests': true,
+			};
+			const inst = new CspDirectives(csp,[],csp);
+			const getHeaders = jest.spyOn(inst,'getHeaders');
+			const headers = inst.getHeaders();
+			expect(getHeaders).toHaveReturned();
+			expect(headers).toMatchObject({
+				'Content-Security-Policy-Report-Only': 'upgrade-insecure-requests;',
+				'Content-Security-Policy': 'upgrade-insecure-requests;',
+				'Report-To': '',
+				'Referrer-Policy': 'strict-origin-when-cross-origin',
+			});
+		});
 		it('returns on all set',() => {
 			const sampleSha256 = `sha256-${sample64Hash('sha256')}` as const;
 			const csp: Directives = {
@@ -73,7 +88,7 @@ describe('new CspDirectives()',() => {
 					endpoints: [{url:endpoint}],
 				},
 			];
-			const result = Object.entries(csp).map(([k,v]) => ` ${k} '${v}';`).join('');
+			const result = Object.entries(csp).map(([k,v]) => `${k} '${v}';`).join(' ');
 			const inst = new CspDirectives(csp,reportTo,csp,'strict-origin');
 			const getHeaders = jest.spyOn(inst,'getHeaders');
 			const headers = inst.getHeaders();
