@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.2...v1.1.3) (2021-05-07)
+
+
+### Bug Fixes
+
+* :bug: returned spacing in header strings ([e3e1e7b](https://github.com/josh-hemphill/csp-typed-directives/commit/e3e1e7ba153b75430ec72ae38f8aae3b7007d614))
+
 ## [1.1.2](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.1...v1.1.2) (2021-05-07)
 
 
