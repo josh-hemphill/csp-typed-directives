@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.1...v1.1.2) (2021-05-07)
+
+
+### Bug Fixes
+
+* :bug: optionality of host source compose params ([bb09ab5](https://github.com/josh-hemphill/csp-typed-directives/commit/bb09ab5cadd5aeee8095a14f55979448fb24f9e6))
+
 ## [1.1.1](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.0...v1.1.1) (2021-05-06)
 
 
