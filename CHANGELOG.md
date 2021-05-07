@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.3...v1.1.4) (2021-05-07)
+
+
+### Bug Fixes
+
+* :label: export valid hash types ([4133b14](https://github.com/josh-hemphill/csp-typed-directives/commit/4133b147c212a26f65cde630b756dc0d1372dbba))
+
 ## [1.1.3](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.2...v1.1.3) (2021-05-07)
 
 
