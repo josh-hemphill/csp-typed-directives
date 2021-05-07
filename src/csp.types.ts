@@ -233,11 +233,17 @@ export const directiveValuesByCategory = {
 				'Protocol': hostProtocolScheme,
 			},
 			compose: (args: {
-				'Port': number,
-				'Hostname': string,
-				'Protocol': HostProtocolSchemes,
-			}) =>
-				<HostSource>`${args?.['Protocol'] || ''}${args?.['Hostname'] || ''}${args?.['Port'] ? ':' + args?.['Port'] : ''}`,
+				'Port'?: number,
+				'Hostname'?: string,
+				'Protocol'?: HostProtocolSchemes,
+			}) => <HostSource>(
+				(args?.Protocol || '') +
+				(args?.Hostname || '') +
+				(args?.Port
+					? ':' + args?.Port
+					: ''
+				)
+			),
 		},
 	],
 	schemeSource,

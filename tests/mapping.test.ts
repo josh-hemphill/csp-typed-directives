@@ -11,97 +11,98 @@ describe('DirectiveMap.get()',() => {
 	describe('Dynamic Options',() => {
 		it('Handles Hostname/URL Source',() => {
 			const src = DirectiveMap.get('child-src');
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const start: any = undefined;
-			const result = src?.values.reduce((_,v) => {
+			let result1: unknown = '';
+			let result2: unknown = '';
+			for (const item of src?.values || []) {
 				if (
-					isObject(v) &&
-					hasOwnProperty(v,'displayName') &&
-					v.displayName === 'Hostname/URL Source'
+					isObject(item) &&
+					hasOwnProperty(item,'displayName') &&
+					item.displayName === 'Hostname/URL Source'
 				) {
-					return v?.compose?.({
+					result1 = item.compose?.({
 						'Hostname': 'example.com',
 						'Port': 443,
 						'Protocol':'https://',
 					});
 				}
-				return _;
-			},start);
-			expect(result).toBe('https://example.com:443');
+			}
+			for (const item of src?.values || []) {
+				if (
+					isObject(item) &&
+					hasOwnProperty(item,'displayName') &&
+					item.displayName === 'Hostname/URL Source'
+				) {
+					result2 = item.compose?.({});
+				}
+			}
+			expect(result1).toBe('https://example.com:443');
+			expect(result2).toBe('');
 		});
 		it('Crypto Nonce/Hash Source',() => {
 			const src = DirectiveMap.get('child-src');
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const start: any = undefined;
-			const result = src?.values.reduce((_,v) => {
+			let result: unknown = '';
+			for (const item of src?.values || []) {
 				if (
-					isObject(v) &&
-					hasOwnProperty(v,'displayName') &&
-					v.displayName === 'Crypto Nonce/Hash Source'
+					isObject(item) &&
+					hasOwnProperty(item,'displayName') &&
+					item.displayName === 'Crypto Nonce/Hash Source'
 				) {
-					return v?.compose?.({
+					result = item.compose?.({
 						'Algorithm':'sha256',
 						'Hash':'SomeBase64String',
 					});
 				}
-				return _;
-			},start);
+			}
 			expect(result).toBe('sha256-SomeBase64String');
 		});
 		it('Handles URI Source',() => {
-			const src = DirectiveMap.get('child-src');
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const start: any = undefined;
-			const result = src?.values.reduce((_,v) => {
+			const src = DirectiveMap.get('report-uri');
+			let result: unknown = '';
+			for (const item of src?.values || []) {
 				if (
-					isObject(v) &&
-					hasOwnProperty(v,'displayName') &&
-					v.displayName === 'URI Source'
+					isObject(item) &&
+					hasOwnProperty(item,'displayName') &&
+					item.displayName === 'URI Source'
 				) {
-					return v?.compose?.({
+					result = item.compose?.({
 						'Beginning Delineator':'/',
 						'Remaining Path':'send/reports/to',
 					});
 				}
-				return _;
-			},start);
+			}
 			expect(result).toBe('/send/reports/to');
 		});
 		it('Handles Plugin MIME Type Source',() => {
-			const src = DirectiveMap.get('child-src');
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const start: any = undefined;
-			const result = src?.values.reduce((_,v) => {
+			const src = DirectiveMap.get('plugin-types');
+			let result: unknown = '';
+			for (const item of src?.values || []) {
 				if (
-					isObject(v) &&
-					hasOwnProperty(v,'displayName') &&
-					v.displayName === 'Plugin MIME Type Source'
+					isObject(item) &&
+					hasOwnProperty(item,'displayName') &&
+					item.displayName === 'Plugin MIME Type Source'
 				) {
-					return v?.compose?.({
+					result = item.compose?.({
 						'MIME Category':'application',
 						'MIME Implementation':'xml',
 					});
 				}
-				return _;
-			},start);
+			}
 			expect(result).toBe('application/xml');
 		});
 		it('Handles Any String',() => {
-			const src = DirectiveMap.get('child-src');
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			const start: any = undefined;
-			const result = src?.values.reduce((_,v) => {
+			const src = DirectiveMap.get('report-to');
+			let result: unknown = '';
+			for (const item of src?.values || []) {
 				if (
-					isObject(v) &&
-					hasOwnProperty(v,'displayName') &&
-					v.displayName === 'Any String'
+					isObject(item) &&
+					hasOwnProperty(item,'displayName') &&
+					item.displayName === 'Any String'
 				) {
-					return v?.compose?.({
+					result = item.compose?.({
 						'String':'hello world',
 					});
 				}
-				return _;
-			},start);
+			}
 			expect(result).toBe('hello world');
 		});
 	});
