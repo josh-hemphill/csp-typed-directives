@@ -7,8 +7,10 @@ import {
 	directiveValuesByCategory,
 	validHashes,
 	validCrypto,
+	Source,
 } from './csp.types.js';
 
+export type ValidSource = Source;
 type ReportTos = ReportTo | ReportTo[]
 function normalizeArrayString<T> (arrS: T[] | T): T[] {
 	return Array.isArray(arrS) ? arrS : [arrS];
