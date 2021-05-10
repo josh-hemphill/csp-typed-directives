@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.4...v1.1.5) (2021-05-10)
+
+
+### Bug Fixes
+
+* :label: export valid source types ([cf9e626](https://github.com/josh-hemphill/csp-typed-directives/commit/cf9e6261894509c7745887919acea537f9f40682))
+
 ## [1.1.4](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.3...v1.1.4) (2021-05-07)
 
 
