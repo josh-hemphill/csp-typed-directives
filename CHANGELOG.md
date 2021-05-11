@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.5...v1.1.6) (2021-05-11)
+
+
+### Bug Fixes
+
+* :bug: allow early validation ([7648cb1](https://github.com/josh-hemphill/csp-typed-directives/commit/7648cb191986e8eac793614806c286206e74dc1b))
+
 ## [1.1.5](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.4...v1.1.5) (2021-05-10)
 
 

@@ -1,6 +1,6 @@
 {
 	"name": "csp-typed-directives",
-	"version": "1.1.5",
+	"version": "1.1.6",
 	"description": "Provides type information for all CSP directives and related headers' directives; as well as a basic utility funtion that helps convert the typed properties to the header content's policy string.",
 	"type": "module",
 	"scripts": {
