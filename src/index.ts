@@ -68,7 +68,7 @@ export class CspDirectives {
 			this.ReferrerHeader = csp.referrer;
 		}
 	}
-	private checkReportTo (){
+	checkReportTo (): void {
 		const reportTo = this.CSP?.['report-to'];
 		if (reportTo === undefined) return;
 		else {
