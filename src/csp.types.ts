@@ -29,13 +29,9 @@ type UriPath = `${HttpDelineators}${string}`
 export const baseSources = ['self', 'unsafe-eval', 'unsafe-hashes', 'unsafe-inline', 'none'] as const;
 type BaseSources = typeof baseSources[number]
 
-// strict-dynamic
-export const strictDynamic = ['strict-dynamic'] as const;
-type StrictDynamic = typeof strictDynamic[number]
-
 // Combined all source directives
 export const source = [...baseSources, ...schemeSource] as const;
-export type Source = BaseSources | HostSource | SchemeSource | CryptoSources | StrictDynamic
+export type Source = BaseSources | HostSource | SchemeSource | CryptoSources
 type Sources = Source | Source[]
 
 export const referrerHeaderOptions = [
@@ -82,7 +78,7 @@ type ChildDirectives = {
 
 type SourceDirectives = {
 	'connect-src'?: Sources
-	'default-src'?: Sources
+	'default-src'?: ActionSource | ActionSource[]
 	'font-src'?: Sources
 	'frame-src'?: Sources
 	'img-src'?: Sources
@@ -90,7 +86,7 @@ type SourceDirectives = {
 	'media-src'?: Sources
 	'object-src'?: Sources
 	'prefetch-src'?: Sources
-	'script-src'?: Sources
+	'script-src'?: ActionSource | ActionSource[]
 	'script-src-elem'?: Sources
 	'script-src-attr'?: Sources
 	'style-src'?: Sources
@@ -264,7 +260,6 @@ export const directiveValuesByCategory = {
 		},
 	],
 	baseSources,
-	strictDynamic,
 	primitiveSourceBool: [
 		true,
 		false,
@@ -315,7 +310,7 @@ export const directiveValuesByCategory = {
 
 export const directiveMap: Readonly<Record<(keyof Directives),Readonly<(keyof typeof directiveValuesByCategory)[]>>> = {
 	'child-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
-	'default-src': ['hostSource', 'schemeSource', 'cryptoSource', 'baseSources', 'strictDynamic'],
+	'default-src': ['hostSource', 'schemeSource', 'cryptoSource', 'baseSources', 'actionSource'],
 	'frame-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
 	'worker-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
 	'connect-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
@@ -325,7 +320,7 @@ export const directiveMap: Readonly<Record<(keyof Directives),Readonly<(keyof ty
 	'media-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
 	'object-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
 	'prefetch-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
-	'script-src': ['hostSource','schemeSource','cryptoSource','baseSources', 'strictDynamic'],
+	'script-src': ['hostSource','schemeSource','cryptoSource','baseSources', 'actionSource'],
 	'script-src-elem': ['hostSource','schemeSource','cryptoSource','baseSources'],
 	'script-src-attr': ['hostSource','schemeSource','cryptoSource','baseSources'],
 	'style-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
