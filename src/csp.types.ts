@@ -8,7 +8,7 @@ type SchemeSource = typeof schemeSource[number];
 
 // Hosts Source Definition
 type HostProtocolSchemes = `${string}://` | ''
-type PortScheme = `:${number}` | ''
+type PortScheme = `:${number}` | '' | ':*'
 /** Can actually be any string, but typed with `string.string` to restrict the combined optional types from all just bing `string` */
 type HostNameScheme = `${string}.${string}`
 type HostSource = `${HostProtocolSchemes}${HostNameScheme}${PortScheme}`
