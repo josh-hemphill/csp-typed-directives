@@ -7,8 +7,7 @@ export const schemeSource = ['http:', 'https:', 'data:', 'mediastream:', 'blob:'
 type SchemeSource = typeof schemeSource[number];
 
 // Hosts Source Definition
-export const hostProtocolScheme = ['http://', 'https://', ''] as const;
-type HostProtocolSchemes = typeof hostProtocolScheme[number];
+type HostProtocolSchemes = `${string}://` | ''
 type PortScheme = `:${number}` | ''
 /** Can actually be any string, but typed with `string.string` to restrict the combined optional types from all just bing `string` */
 type HostNameScheme = `${string}.${string}`
@@ -232,7 +231,7 @@ export const directiveValuesByCategory = {
 			consumes: {
 				'Port': 'number',
 				'Hostname': 'string',
-				'Protocol': hostProtocolScheme,
+				'Protocol': 'string://',
 			},
 			compose: (args: {
 				'Port'?: number,
