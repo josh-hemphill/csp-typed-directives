@@ -58,6 +58,7 @@ describe('new CspDirectives()',() => {
 			const sampleSha256 = `sha256-${sample64Hash('sha256')}` as const;
 			const csp: Directives = {
 				'child-src': 'none',
+				'default-src': 'self',
 				'frame-src': 'unsafe-eval',
 				'connect-src': 'example.com',
 				'font-src': 'https:',
@@ -66,7 +67,7 @@ describe('new CspDirectives()',() => {
 				'media-src': sampleSha256,
 				'object-src': 'example.com:443',
 				'prefetch-src': sampleSha256,
-				'script-src': sampleSha256,
+				'script-src': 'strict-dynamic',
 				'script-src-elem': sampleSha256,
 				'script-src-attr': sampleSha256,
 				'style-src': sampleSha256,

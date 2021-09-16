@@ -7,11 +7,10 @@ export const schemeSource = ['http:', 'https:', 'data:', 'mediastream:', 'blob:'
 type SchemeSource = typeof schemeSource[number];
 
 // Hosts Source Definition
-export const hostProtocolScheme = ['http://', 'https://', ''] as const;
-type HostProtocolSchemes = typeof hostProtocolScheme[number];
-type PortScheme = `:${number}` | ''
+type HostProtocolSchemes = `${string}://` | ''
+type PortScheme = `:${number}` | '' | ':*'
 /** Can actually be any string, but typed with `string.string` to restrict the combined optional types from all just bing `string` */
-type HostNameScheme = `${string}.${string}`
+type HostNameScheme = `${string}.${string}` | `${string}`
 type HostSource = `${HostProtocolSchemes}${HostNameScheme}${PortScheme}`
 
 // Crypto Source Definition
@@ -78,6 +77,7 @@ type ChildDirectives = {
 
 type SourceDirectives = {
 	'connect-src'?: Sources
+	'default-src'?: ActionSource | ActionSource[]
 	'font-src'?: Sources
 	'frame-src'?: Sources
 	'img-src'?: Sources
@@ -85,7 +85,7 @@ type SourceDirectives = {
 	'media-src'?: Sources
 	'object-src'?: Sources
 	'prefetch-src'?: Sources
-	'script-src'?: Sources
+	'script-src'?: ActionSource | ActionSource[]
 	'script-src-elem'?: Sources
 	'script-src-attr'?: Sources
 	'style-src'?: Sources
@@ -231,7 +231,7 @@ export const directiveValuesByCategory = {
 			consumes: {
 				'Port': 'number',
 				'Hostname': 'string',
-				'Protocol': hostProtocolScheme,
+				'Protocol': 'string://',
 			},
 			compose: (args: {
 				'Port'?: number,
@@ -309,6 +309,7 @@ export const directiveValuesByCategory = {
 
 export const directiveMap: Readonly<Record<(keyof Directives),Readonly<(keyof typeof directiveValuesByCategory)[]>>> = {
 	'child-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'default-src': ['hostSource', 'schemeSource', 'cryptoSource', 'baseSources', 'actionSource'],
 	'frame-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
 	'worker-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
 	'connect-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
@@ -318,7 +319,7 @@ export const directiveMap: Readonly<Record<(keyof Directives),Readonly<(keyof ty
 	'media-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
 	'object-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
 	'prefetch-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
-	'script-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
+	'script-src': ['hostSource','schemeSource','cryptoSource','baseSources', 'actionSource'],
 	'script-src-elem': ['hostSource','schemeSource','cryptoSource','baseSources'],
 	'script-src-attr': ['hostSource','schemeSource','cryptoSource','baseSources'],
 	'style-src': ['hostSource','schemeSource','cryptoSource','baseSources'],
