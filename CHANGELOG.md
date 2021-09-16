@@ -1,3 +1,10 @@
+## [1.1.7](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.6...v1.1.7) (2021-09-16)
+
+
+### Bug Fixes
+
+* :bug: Fix typings and update deps ([6094233](https://github.com/josh-hemphill/csp-typed-directives/commit/6094233def1747089fdaa738d3d4e83a8ffdb226)), closes [#2](https://github.com/josh-hemphill/csp-typed-directives/issues/2)
+
 ## [1.1.6](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.5...v1.1.6) (2021-05-11)
 
 
