@@ -9,8 +9,9 @@ type SchemeSource = typeof schemeSource[number];
 // Hosts Source Definition
 type HostProtocolSchemes = `${string}://` | ''
 type PortScheme = `:${number}` | '' | ':*'
-/** Can actually be any string, but typed with `string.string` to restrict the combined optional types from all just bing `string` */
-type HostNameScheme = `${string}.${string}` | `${string}`
+/** Can actually be any string, but typed more explicitly to
+ *  restrict the combined optional types of Source from collapsing to just bing `string` */
+type HostNameScheme = `${string}.${string}` | `localhost`
 type HostSource = `${HostProtocolSchemes}${HostNameScheme}${PortScheme}`
 
 // Crypto Source Definition

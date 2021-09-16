@@ -1,6 +1,7 @@
-import type {Config } from '@jest/types';
-import {jsWithTs} from 'ts-jest/presets';
-const config: Config.InitialOptions = {
+const {jsWithTs} = require('ts-jest/presets');
+const config =
+/** @type {import('@jest/types').InitialOptions} */
+{
 	'rootDir':'../',
 	'preset': 'ts-jest/presets/js-with-ts',
 	testEnvironment: 'node',
@@ -23,4 +24,4 @@ const config: Config.InitialOptions = {
 		},
 	},
 };
-export default config;
+module.exports = config;

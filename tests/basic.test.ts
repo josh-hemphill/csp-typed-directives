@@ -20,7 +20,7 @@ describe('new CspDirectives()',() => {
 			ReferrerHeader: 'strict-origin-when-cross-origin',
 		});
 	});
-	it('Defaults Refferer to depricated referrer directive if present',() => {
+	it('Defaults Referer to deprecated referrer directive if present',() => {
 		const inst = new CspDirectives({
 			'referrer': 'strict-origin',
 		});
