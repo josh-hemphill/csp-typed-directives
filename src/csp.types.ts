@@ -97,7 +97,7 @@ type SourceDirectives = {
 
 export const sandboxDirectives = [
 	/** Allows for downloads to occur without a gesture from the user. */
-	'allow-downloads-without-user-activation ',
+	'allow-downloads-without-user-activation',
 	/** Allows the page to submit forms. If this keyword is not used, this operation is not allowed. */
 	'allow-forms',
 	/** Allows the page to open modal windows. */
@@ -122,7 +122,7 @@ export const sandboxDirectives = [
 	 * If this keyword is not used, this operation is not allowed. */
 	'allow-scripts',
 	/** Lets the resource request access to the parent's storage capabilities with the Storage Access API. */
-	'allow-storage-access-by-user-activation ',
+	'allow-storage-access-by-user-activation',
 	/** Allows the page to navigate (load) content to the top-level browsing context.
 	 * If this keyword is not used, this operation is not allowed. */
 	'allow-top-navigation',

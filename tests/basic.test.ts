@@ -89,17 +89,11 @@ describe('new CspDirectives()',() => {
 					endpoints: [{url:endpoint}],
 				},
 			];
-			const result = Object.entries(csp).map(([k,v]) => `${k} '${v}';`).join(' ');
 			const inst = new CspDirectives(csp,reportTo,csp,'strict-origin');
 			const getHeaders = jest.spyOn(inst,'getHeaders');
 			const headers = inst.getHeaders();
 			expect(getHeaders).toHaveReturned();
-			expect(headers).toMatchObject({
-				'Content-Security-Policy-Report-Only': result,
-				'Content-Security-Policy': result,
-				'Report-To': JSON.stringify(reportTo),
-				'Referrer-Policy': 'strict-origin',
-			});
+			expect(headers).toMatchSnapshot();
 		});
 		it('Throws on invalid "report-to" group name',() => {
 			const inst = new CspDirectives({

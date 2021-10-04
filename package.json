@@ -17,6 +17,7 @@
 		"test:spelling": "cspell --config ./cSpell.json \"{README.md,.github/*.md,src/**/*.ts,docs/**/*.md}\"",
 		"test:unit": "jest -c config/jest.config.cjs -b --detectOpenHandles --forceExit --coverage --runInBand ",
 		"watch:test": "jest -c config/jest.config.cjs -b --detectOpenHandles --forceExit --runInBand --watch",
+		"debug:unittests": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand -c config/jest.config.cjs -b --detectOpenHandles --forceExit",
 		"cov:send": "run-s build test && codecov",
 		"doc": "run-s doc:html && open-cli build/docs/index.html",
 		"doc:html": "typedoc src/ --exclude **/*.test.ts --target ES6 --mode file --out build/docs",
