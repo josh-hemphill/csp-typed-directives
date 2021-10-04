@@ -1,3 +1,10 @@
+## [1.1.8](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.7...v1.1.8) (2021-10-04)
+
+
+### Bug Fixes
+
+* :bug: fix quoting of policies ([ed84e27](https://github.com/josh-hemphill/csp-typed-directives/commit/ed84e276a2c4adafe356709b3de5f11dce569984)), closes [#3](https://github.com/josh-hemphill/csp-typed-directives/issues/3)
+
 ## [1.1.7](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.6...v1.1.7) (2021-09-16)
 
 
