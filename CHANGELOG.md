@@ -1,3 +1,10 @@
+## [1.1.9](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.8...v1.1.9) (2021-10-10)
+
+
+### Bug Fixes
+
+* :bug: move globals to normal ts to include missing in dist ([e45fbc7](https://github.com/josh-hemphill/csp-typed-directives/commit/e45fbc79ffbb33df43652834b94e91519e1c4657))
+
 ## [1.1.8](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.7...v1.1.8) (2021-10-04)
 
 
