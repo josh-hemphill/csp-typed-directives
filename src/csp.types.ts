@@ -6,6 +6,9 @@
 export const schemeSource = ['http:', 'https:', 'data:', 'mediastream:', 'blob:', 'filesystem:'] as const;
 type SchemeSource = typeof schemeSource[number];
 
+type OptionalPath = `${HttpDelineators}${string}` | ''
+type UrlString = `${HostSource}${OptionalPath}`;
+
 // Hosts Source Definition
 type HostProtocolSchemes = `${string}://` | ''
 type PortScheme = `:${number}` | '' | ':*'
