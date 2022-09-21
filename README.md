@@ -9,6 +9,7 @@
 [![Rate on Openbase](https://badges.openbase.com/js/rating/csp-typed-directives.svg)](https://openbase.com/js/csp-typed-directives?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 [![Test](https://github.com/josh-hemphill/csp-typed-directives/actions/workflows/test.yml/badge.svg)](https://github.com/josh-hemphill/csp-typed-directives/actions/workflows/test.yml)
 [![Build Release](https://github.com/josh-hemphill/csp-typed-directives/actions/workflows/release.yml/badge.svg)](https://github.com/josh-hemphill/csp-typed-directives/actions/workflows/release.yml)
+[![kandi X-Ray](https://kandi.openweaver.com/badges/xray.svg)](https://kandi.openweaver.com/typescript/josh-hemphill/csp-typed-directives)
 
 Provides type information for all CSP directives and related headers' directives; as well as a basic utility funtion that helps convert the typed properties to key/values of each header content's policy string.
 
