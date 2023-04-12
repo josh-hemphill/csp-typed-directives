@@ -20,7 +20,8 @@ jobs:
       matrix:
         node-version:
           - 14
-          - 16 # Becomes active in early April 2021
+          - 16
+          - 18
 
     runs-on: ubuntu-latest
 
