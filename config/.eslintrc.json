@@ -3,14 +3,14 @@
 	"extends": [
 		"eslint:recommended",
 		"plugin:@typescript-eslint/recommended",
-		"plugin:jest/recommended"
+		"plugin:vitest/recommended"
 	],
 	"plugins": [
 		"@typescript-eslint",
 		"promise",
 		"import",
 		"node",
-		"jest"
+		"vitest"
 	],
 	"rules": {
 		"no-console": "warn",

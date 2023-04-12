@@ -99,6 +99,7 @@
 		"eslint-plugin-jest": "^27.2.1",
 		"eslint-plugin-node": "^11.1.0",
 		"eslint-plugin-promise": "^6.1.1",
+		"eslint-plugin-vitest": "^0.1.4",
 		"gh-pages": "^5.0.0",
 		"husky": "^8.0.3",
 		"lint-staged": "^13.2.1",
@@ -120,11 +121,6 @@
 	},
 	"release": {
 		"extends": "./config/.releaserc.json"
-	},
-	"config": {
-		"commitizen": {
-			"path": "cz-conventional-changelog"
-		}
 	},
 	"husky": {
 		"hooks": {
