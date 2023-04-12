@@ -13,7 +13,6 @@
 			"esnext"
 		],
 		"types": [
-			"jest",
 			"node"
 		],
 		"sourceMap": false,

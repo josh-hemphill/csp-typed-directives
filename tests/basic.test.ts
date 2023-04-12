@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import { Directives, ReportTo } from '../src/csp.types.js';
 import { CspDirectives } from '../src/index.js';
 import { createHash } from 'crypto';
@@ -9,7 +10,7 @@ const sample64Hash = (algorithm: string) => {
 
 describe('new CspDirectives()',() => {
 	it('Instantiates', () => {
-		const inst = jest.fn(() => new CspDirectives());
+		const inst = vi.fn(() => new CspDirectives());
 		const res = inst();
 		expect(inst).toHaveBeenCalled();
 		expect(inst).toHaveReturned();
@@ -29,7 +30,7 @@ describe('new CspDirectives()',() => {
 	describe('.headers',() => {
 		it('returns on empty',() => {
 			const inst = new CspDirectives();
-			const getHeaders = jest.spyOn(inst,'getHeaders');
+			const getHeaders = vi.spyOn(inst,'getHeaders');
 			const headers = inst.getHeaders();
 			expect(getHeaders).toHaveReturned();
 			expect(headers).toMatchObject({
@@ -44,7 +45,7 @@ describe('new CspDirectives()',() => {
 				'upgrade-insecure-requests': true,
 			};
 			const inst = new CspDirectives(csp,[],csp);
-			const getHeaders = jest.spyOn(inst,'getHeaders');
+			const getHeaders = vi.spyOn(inst,'getHeaders');
 			const headers = inst.getHeaders();
 			expect(getHeaders).toHaveReturned();
 			expect(headers).toMatchObject({
@@ -90,7 +91,7 @@ describe('new CspDirectives()',() => {
 				},
 			];
 			const inst = new CspDirectives(csp,reportTo,csp,'strict-origin');
-			const getHeaders = jest.spyOn(inst,'getHeaders');
+			const getHeaders = vi.spyOn(inst,'getHeaders');
 			const headers = inst.getHeaders();
 			expect(getHeaders).toHaveReturned();
 			expect(headers).toMatchSnapshot();
@@ -99,13 +100,13 @@ describe('new CspDirectives()',() => {
 			const inst = new CspDirectives({
 				'report-to': 'invalid',
 			});
-			jest.spyOn(inst,'getHeaders');
+			vi.spyOn(inst,'getHeaders');
 			try {
 				inst.getHeaders();
 			} catch (_) {
 				'nothing';
 			}
-			expect(inst.getHeaders).toThrowError();
+			expect(inst.getHeaders).toThrow();
 		});
 
 		it('supports wildcards',() => {
@@ -115,7 +116,7 @@ describe('new CspDirectives()',() => {
 			const inst = new CspDirectives(csp, [], csp);
 			expect(inst.getHeaders()).toStrictEqual({
 				'Content-Security-Policy-Report-Only': 'style-src * data:;',
-				'Content-Security-Policy': "style-src * data:;",
+				'Content-Security-Policy': 'style-src * data:;',
 				'Report-To': '',
 				'Referrer-Policy': 'strict-origin-when-cross-origin',
 			});

@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { DirectiveMap } from '../src/index.js';
 
 function isObject (obj: unknown): obj is Record<PropertyKey,unknown> {

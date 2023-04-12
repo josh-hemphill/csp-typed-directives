@@ -1,0 +1,7 @@
+{
+	// "upgrade": true,
+	"peer": true,
+	"packageManager": "pnpm"
+	// "filter": "svelte",
+	// "reject": ["@types/estree", "ts-node"]
+}

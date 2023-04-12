@@ -72,10 +72,10 @@ function isQuotedPolicy (policy: string): boolean {
 }
 
 export class CspDirectives {
-	public CSP: Directives
-	public ReportOnly: Directives | false
-	public ReportTo: ReportTos
-	public ReferrerHeader: ReferrerHeaderOptions
+	public CSP: Directives;
+	public ReportOnly: Directives | false;
+	public ReportTo: ReportTos;
+	public ReferrerHeader: ReferrerHeaderOptions;
 	constructor (
 		csp?: Directives,
 		sendReportsTo?: ReportTos,
