@@ -63,6 +63,7 @@ const PolicySet = new Set([
 	...sandboxDirectives,
 ]);
 function isQuotedPolicy (policy: string): boolean {
+	if (policy === '*') return false;
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
 	if (PolicySet.has(policy)) return true;
