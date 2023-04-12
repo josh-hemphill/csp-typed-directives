@@ -107,5 +107,18 @@ describe('new CspDirectives()',() => {
 			}
 			expect(inst.getHeaders).toThrowError();
 		});
+
+		it('supports wildcards',() => {
+			const csp: Directives = {
+				'style-src': ['*', 'data:'],
+			};
+			const inst = new CspDirectives(csp, [], csp);
+			expect(inst.getHeaders()).toStrictEqual({
+				'Content-Security-Policy-Report-Only': 'style-src * data:;',
+				'Content-Security-Policy': "style-src * data:;",
+				'Report-To': '',
+				'Referrer-Policy': 'strict-origin-when-cross-origin',
+			});
+		});
 	});
 });
