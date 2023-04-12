@@ -1,3 +1,10 @@
+## [1.1.10](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.9...v1.1.10) (2023-04-12)
+
+
+### Bug Fixes
+
+* wildcards being quoted ([#6](https://github.com/josh-hemphill/csp-typed-directives/issues/6)) ([9e95ca1](https://github.com/josh-hemphill/csp-typed-directives/commit/9e95ca1c5210abde1b0f517b938fab1f71aaf845))
+
 ## [1.1.9](https://github.com/josh-hemphill/csp-typed-directives/compare/v1.1.8...v1.1.9) (2021-10-10)
 
 
