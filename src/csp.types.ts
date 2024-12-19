@@ -29,7 +29,7 @@ type HttpDelineators = typeof httpDelineators[number];
 type UriPath = `${HttpDelineators}${string}`
 
 // Base Source Directives
-export const baseSources = ['self', 'unsafe-eval', 'unsafe-hashes', 'unsafe-inline', 'none', '*'] as const;
+export const baseSources = ['self', 'unsafe-eval', 'wasm-unsafe-eval', 'unsafe-hashes', 'unsafe-inline', 'none', '*'] as const;
 type BaseSources = typeof baseSources[number]
 
 // Combined all source directives
